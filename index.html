@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Heat Race Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Heat: Pedal to the Metal</p>
+        <h1>Race Tracker</h1>
+        <p class="lede">Track your drivers, race results, and championship table from your phone.</p>
+      </div>
+      <div class="score-card" aria-label="Championship scoring">
+        <span>Points</span>
+        <strong>9 · 6 · 4 · 3 · 2 · 1</strong>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="panel standings-panel" aria-labelledby="standings-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Championship</p>
+            <h2 id="standings-title">Standings</h2>
+            <p id="active-championship-label" class="subheading">No championship selected.</p>
+          </div>
+          <button class="ghost danger" id="reset-data" type="button">Reset</button>
+        </div>
+        <div id="standings" class="standings empty-state">Add players and races to build the championship table.</div>
+      </section>
+
+      <section class="panel" aria-labelledby="championships-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Seasons</p>
+            <h2 id="championships-title">Championships</h2>
+          </div>
+        </div>
+        <form id="championship-form" class="inline-form">
+          <label class="sr-only" for="championship-name">Championship name</label>
+          <input id="championship-name" name="championshipName" autocomplete="off" placeholder="1964, 1965..." required>
+          <button type="submit">Add</button>
+        </form>
+        <div id="championships" class="championship-list empty-state">No championships yet.</div>
+      </section>
+
+      <section class="panel" aria-labelledby="players-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Roster</p>
+            <h2 id="players-title">Drivers</h2>
+          </div>
+        </div>
+        <form id="player-form" class="inline-form">
+          <label class="sr-only" for="player-name">Driver name</label>
+          <input id="player-name" name="playerName" autocomplete="off" placeholder="Add driver name" required>
+          <label class="sr-only" for="player-colour">Car colour</label>
+          <select id="player-colour" name="playerColour" aria-label="Car colour"></select>
+          <button type="submit">Add</button>
+        </form>
+        <div id="players" class="pill-list empty-state">No drivers yet.</div>
+      </section>
+
+      <section class="panel" aria-labelledby="race-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Race day</p>
+            <h2 id="race-title">Add Race</h2>
+          </div>
+        </div>
+        <form id="race-form" class="race-form">
+          <p id="race-championship-label" class="subheading">Create or select a championship before saving races.</p>
+          <div class="field-grid">
+            <label>
+              Track
+              <input id="track" name="track" autocomplete="off" placeholder="USA, Italy, Japan..." required>
+            </label>
+            <label>
+              Date
+              <input id="race-date" name="raceDate" type="date" required>
+            </label>
+          </div>
+          <div class="result-builder">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">Finish order</p>
+                <h3>Rank Drivers</h3>
+              </div>
+              <button class="ghost" id="clear-order" type="button">Clear</button>
+            </div>
+            <div id="finish-order" class="finish-order empty-state">Add drivers to your roster, then tap them in finishing order.</div>
+            <div id="driver-buttons" class="driver-buttons empty-state">No drivers available.</div>
+          </div>
+          <label>
+            Notes
+            <textarea id="notes" name="notes" rows="3" placeholder="Weather, big crashes, memorable plays..."></textarea>
+          </label>
+          <div class="form-actions">
+            <button id="save-race" type="submit" class="primary-action">Save Race</button>
+            <button id="cancel-edit" class="ghost" type="button" hidden>Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="history-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Archive</p>
+            <h2 id="history-title">Race History</h2>
+          </div>
+        </div>
+        <div id="race-history" class="race-history empty-state">Select a championship to view its races.</div>
+      </section>
+
+      <section class="panel" aria-labelledby="backup-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Portable data</p>
+            <h2 id="backup-title">Import / Export JSON</h2>
+          </div>
+        </div>
+        <div class="backup-actions">
+          <button id="export-json" type="button">Export JSON</button>
+          <label class="file-button">
+            Import JSON
+            <input id="import-json" type="file" accept="application/json,.json">
+          </label>
+        </div>
+        <p class="help-text">Export creates a backup file. Import replaces the current tracker data after confirmation.</p>
+      </section>
+    </main>
+
+    <template id="standing-row-template">
+      <article class="standing-row">
+        <div class="rank"></div>
+        <div>
+          <strong class="name"></strong>
+          <span class="record"></span>
+        </div>
+        <div class="points"></div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
