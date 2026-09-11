@@ -7,7 +7,7 @@ const COLOURS = [
   { name: "Green", value: "#43a047" },
   { name: "Yellow", value: "#fdd835" },
   { name: "Black", value: "#111111" },
-  { name: "White", value: "#f5f2e8" },
+  { name: "Grey", value: "#A9A9A9" },
   { name: "Orange", value: "#fb8c00" },
   { name: "Purple", value: "#8e24aa" },
 ];
